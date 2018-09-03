@@ -1,0 +1,7 @@
+{
+  "name": "finance-ui-ionic",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
