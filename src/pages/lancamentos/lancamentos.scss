@@ -1,0 +1,39 @@
+page-lancamentos {
+  .logo{
+    width: 200px;
+    margin: auto;
+    align-self: center;
+    display: block;
+    padding: 10px;
+  }
+
+  .toolbar-background {
+    background-color: rgb(236, 253, 236);
+  }
+
+  .bod{
+    background: rgb(248, 255, 249);
+  }
+
+  .no-padding{
+    padding: 0;
+  }
+
+  .no-padding-l{
+    padding-left: 0px;
+  }
+
+  .no-padding-r{
+    padding-right: 0px;
+  }
+
+  .no-padding-b{
+    padding-bottom: 0px;
+  }
+
+  h4{
+    color:#404C51;
+    padding-left: 15px;
+    margin-bottom: 0px;
+  }
+}
