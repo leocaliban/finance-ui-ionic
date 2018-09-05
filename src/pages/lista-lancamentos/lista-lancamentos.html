@@ -1,0 +1,46 @@
+<ion-header class="bod">
+
+  <ion-navbar class="bod">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Lista de Lançamentos</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding class="bod">
+  <ion-card *ngFor='let lancamento of lancamentos'>
+    <ion-list>
+      <ion-item>
+        <h2 item-start>Tipo</h2>
+        <p item-end>{{lancamento.tipo}}</p>
+      </ion-item>
+
+      <ion-item>
+          <h2 item-start>Pessoa</h2>
+          <p item-end>{{lancamento.pessoa}}</p>
+      </ion-item>
+
+      <ion-item>
+          <h2 item-start>Descrição</h2>
+          <p item-end>{{lancamento.descricao}}</p>
+      </ion-item>
+
+      <ion-item>
+          <h2 item-start>Vencimento</h2>
+          <p item-end>{{lancamento.dataVencimento}}</p>
+      </ion-item>
+
+      <ion-item>
+          <h2 item-start>Pagamento</h2>
+          <p item-end>{{lancamento.dataPagamento}}</p>
+      </ion-item>
+
+      <ion-item>
+          <h2 item-start>Valor</h2>
+          <p item-end>{{lancamento.valor}}</p>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+</ion-content>

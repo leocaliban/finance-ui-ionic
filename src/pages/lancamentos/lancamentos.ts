@@ -15,4 +15,8 @@ export class LancamentosPage {
     console.log('ionViewDidLoad LancamentosPage');
   }
 
+  public pesquisar() {
+    this.navCtrl.push('ListaLancamentosPage');
+  }
+
 }
