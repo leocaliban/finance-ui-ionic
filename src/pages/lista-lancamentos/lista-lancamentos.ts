@@ -59,4 +59,12 @@ export class ListaLancamentosPage {
     console.log('ionViewDidLoad ListaLancamentosPage');
   }
 
+  getCorValor(evento: any) {
+    if (evento === 'DESPESA') {
+      return 'red';
+    } else {
+      return 'blue';
+    }
+  }
+
 }

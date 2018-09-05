@@ -5,12 +5,28 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Lista de Lançamentos</ion-title>
+    <ion-buttons end>
+        <button ion-button clear icon-only>
+            <ion-icon ios="ios-add" md="md-add"></ion-icon>
+          </button>
+        </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content padding class="bod">
+
   <ion-card *ngFor='let lancamento of lancamentos'>
+
+    <ion-item-divider color="light">
+      <button ion-button clear icon-only item-end>
+        <ion-icon name='md-create'></ion-icon>
+      </button>
+      <button ion-button clear icon-only item-end color="danger">
+        <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
+      </button>
+    </ion-item-divider>
+
     <ion-list>
       <ion-item>
         <h2 item-start>Tipo</h2>
@@ -18,29 +34,30 @@
       </ion-item>
 
       <ion-item>
-          <h2 item-start>Pessoa</h2>
-          <p item-end>{{lancamento.pessoa}}</p>
+        <h2 item-start>Pessoa</h2>
+        <p item-end>{{lancamento.pessoa}}</p>
       </ion-item>
 
       <ion-item>
-          <h2 item-start>Descrição</h2>
-          <p item-end>{{lancamento.descricao}}</p>
+        <h2 item-start>Descrição</h2>
+        <p item-end>{{lancamento.descricao}}</p>
       </ion-item>
 
       <ion-item>
-          <h2 item-start>Vencimento</h2>
-          <p item-end>{{lancamento.dataVencimento}}</p>
+        <h2 item-start>Vencimento</h2>
+        <p item-end>{{lancamento.dataVencimento}}</p>
       </ion-item>
 
       <ion-item>
-          <h2 item-start>Pagamento</h2>
-          <p item-end>{{lancamento.dataPagamento}}</p>
+        <h2 item-start>Pagamento</h2>
+        <p item-end>{{lancamento.dataPagamento}}</p>
       </ion-item>
 
       <ion-item>
-          <h2 item-start>Valor</h2>
-          <p item-end>{{lancamento.valor}}</p>
+        <h2 item-start>Valor</h2>
+        <p item-end [ngStyle]="{ color: getCorValor(lancamento.tipo) }">{{ lancamento.valor | currency:'BRL' }}</p>
       </ion-item>
     </ion-list>
+
   </ion-card>
 </ion-content>
