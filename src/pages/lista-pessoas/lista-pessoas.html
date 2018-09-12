@@ -1,0 +1,52 @@
+<ion-header class="bod">
+
+  <ion-navbar class="bod">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Lista de Pessoas</ion-title>
+    <ion-buttons end>
+      <button ion-button clear icon-only>
+        <ion-icon ios="ios-add" md="md-add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding class="bod">
+  <ion-card *ngFor='let pessoa of pessoas'>
+
+    <ion-item-divider color="light">
+      <button ion-button clear icon-only item-end>
+        <ion-icon name='md-create'></ion-icon>
+      </button>
+      <button ion-button clear icon-only item-end color="danger">
+        <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
+      </button>
+    </ion-item-divider>
+
+    <ion-list>
+      <ion-item>
+        <h2 item-start>Nome</h2>
+        <p item-end>{{pessoa.nome}}</p>
+      </ion-item>
+
+      <ion-item>
+        <h2 item-start>Cidade</h2>
+        <p item-end>{{pessoa.cidade}}</p>
+      </ion-item>
+
+      <ion-item>
+        <h2 item-start>Estado</h2>
+        <p item-end>{{pessoa.estado}}</p>
+      </ion-item>
+
+      <ion-item>
+        <h2 item-start>{{pessoa.ativo ? 'Ativo' : 'Inativo'}}</h2>
+        <ion-toggle value="foo" checked="pessoa.ativo" [(ngModel)]="pessoa.ativo"></ion-toggle>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+</ion-content>

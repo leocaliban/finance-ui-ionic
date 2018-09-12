@@ -1,0 +1,46 @@
+<ion-header class="bod">
+
+  <ion-navbar class="bod">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Pesquisar Pessoas</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding class="bod">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 class="no-padding-b">
+        <img src="assets/imgs/pessoas.png" alt="logo" class="logo no-padding">
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>
+        <ion-grid>
+          <form action="">
+            <ion-row>
+              <ion-col col-11>
+                <ion-item class="bod">
+                  <ion-label floating>
+                    Nome
+                  </ion-label>
+                  <ion-input name='nome' type="text"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </form>
+          <ion-row>
+              <ion-col col-12>
+                <button ion-button round block icon-end (click)="pesquisar()">
+                  PESQUISAR
+                  <ion-icon name="search"></ion-icon>
+                </button>
+              </ion-col>
+            </ion-row>
+        </ion-grid>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
