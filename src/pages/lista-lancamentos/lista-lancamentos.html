@@ -45,17 +45,17 @@
 
       <ion-item>
         <h2 item-start>Vencimento</h2>
-        <p item-end>{{lancamento.dataVencimento}}</p>
+        <p item-end>{{ lancamento.dataVencimento | date:'dd/MM/y' }}</p>
       </ion-item>
 
       <ion-item>
         <h2 item-start>Pagamento</h2>
-        <p item-end>{{lancamento.dataPagamento}}</p>
+        <p item-end>{{ lancamento.dataPagamento | date:'dd/MM/y' }}</p>
       </ion-item>
 
       <ion-item>
         <h2 item-start>Valor</h2>
-        <p item-end [ngStyle]="{ color: getCorValor(lancamento.tipo) }">{{ lancamento.valor | currency:'BRL' }}</p>
+        <p item-end [ngStyle]="{ color: getCorValor(lancamento.tipo) }">{{ lancamento.valor | number:'1.2-2' }}</p>
       </ion-item>
     </ion-list>
 
