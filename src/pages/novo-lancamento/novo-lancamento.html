@@ -1,0 +1,92 @@
+<ion-header class="bod">
+  <ion-navbar class="bod">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Novo Lançamento</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="bod">
+  <ion-grid>
+    <form action="">
+      <ion-row>
+
+        <ion-col>
+          <ion-item class="bod">
+            <ion-label floating>
+              Vencimento
+            </ion-label>
+            <ion-input name='vencimento' type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+
+        <ion-col>
+          <ion-item class="bod">
+            <ion-label floating>
+              Recebimento
+            </ion-label>
+            <ion-input name='recebimento' type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+
+      </ion-row>
+
+      <ion-row>
+        <ion-item class="bod">
+          <ion-label floating>
+            Descrição
+          </ion-label>
+          <ion-input name='descricao' type="text"></ion-input>
+        </ion-item>
+      </ion-row>
+
+      <ion-row>
+        <ion-item class="bod">
+          <ion-label floating>
+            Valor
+          </ion-label>
+          <ion-input name='valor' type="text"></ion-input>
+        </ion-item>
+      </ion-row>
+
+      <ion-row>
+        <ion-item class="bod">
+          <ion-label floating>
+            Categoria
+          </ion-label>
+          <ion-input name='categoria' type="text"></ion-input>
+        </ion-item>
+      </ion-row>
+
+      <ion-row>
+        <ion-item class="bod">
+          <ion-label floating>
+            Pessoa
+          </ion-label>
+          <ion-input name='pessoa' type="text"></ion-input>
+        </ion-item>
+      </ion-row>
+
+      <ion-row>
+        <ion-item class="bod">
+          <ion-label floating>
+            Observação
+          </ion-label>
+          <ion-input name='observacao' type="text"></ion-input>
+        </ion-item>
+      </ion-row>
+
+      <ion-row style="margin-top: 20px;" >
+        <ion-col>
+          <button ion-button round icon-start color="secondary">
+            <ion-icon name="md-checkmark-circle-outline"></ion-icon>
+            SALVAR
+          </button>
+        </ion-col>
+      </ion-row>
+
+    </form>
+  </ion-grid>
+</ion-content>

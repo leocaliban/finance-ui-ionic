@@ -59,6 +59,10 @@ export class ListaLancamentosPage {
     console.log('ionViewDidLoad ListaLancamentosPage');
   }
 
+  public criar() {
+    this.navCtrl.push('NovoLancamentoPage');
+  }
+
   getCorValor(evento: any) {
     if (evento === 'DESPESA') {
       return 'red';

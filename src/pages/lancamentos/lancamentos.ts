@@ -19,4 +19,8 @@ export class LancamentosPage {
     this.navCtrl.push('ListaLancamentosPage');
   }
 
+  public criar() {
+    this.navCtrl.push('NovoLancamentoPage');
+  }
+
 }
