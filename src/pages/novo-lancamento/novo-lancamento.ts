@@ -8,6 +8,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class NovoLancamentoPage {
 
+  tipos = [
+    { label: 'Receita', value: 'RECEITA'},
+    { label: 'Despesa', value: 'DESPESA'}
+  ];
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 

@@ -13,12 +13,24 @@
     <form action="">
       <ion-row>
 
+        <ion-item class="bod">
+          <ion-label>Tipo</ion-label>
+          <ion-select #group>
+            <ion-option value="{{tipo.value}}" *ngFor="let tipo of tipos">{{tipo.label}}</ion-option>
+          </ion-select>
+        </ion-item>
+
+      </ion-row>
+
+      <ion-row>
+
         <ion-col>
           <ion-item class="bod">
             <ion-label floating>
               Vencimento
             </ion-label>
-            <ion-datetime pickerFormat="DD MMMM YYYY" displayFormat="DD MMM YYYY" doneText="CONFIRMAR" cancelText="CANCELAR" max="2030-12-01">
+            <ion-datetime pickerFormat="DD MMMM YYYY" displayFormat="DD MMM YYYY" doneText="CONFIRMAR" cancelText="CANCELAR"
+              max="2030-12-01">
             </ion-datetime>
           </ion-item>
         </ion-col>
@@ -26,9 +38,10 @@
         <ion-col>
           <ion-item class="bod">
             <ion-label floating>
-              Recebimento
+              {{group.value === 'RECEITA' ? 'Recebimento' : 'Pagamento'}}
             </ion-label>
-            <ion-datetime pickerFormat="DD MMMM YYYY" displayFormat="DD MMM YYYY" doneText="CONFIRMAR" cancelText="CANCELAR" max="2030-12-01">
+            <ion-datetime pickerFormat="DD MMMM YYYY" displayFormat="DD MMM YYYY" doneText="CONFIRMAR" cancelText="CANCELAR"
+              max="2030-12-01">
             </ion-datetime>
           </ion-item>
         </ion-col>
