@@ -62,7 +62,8 @@
           <ion-label floating>
             CEP
           </ion-label>
-          <ion-input name='cep' type="text"></ion-input>
+          <ion-input type="text" name="cep" [brmasker]="{mask:'00.000-000', len:10, type:'num' }"></ion-input>
+
         </ion-item>
       </ion-row>
 
