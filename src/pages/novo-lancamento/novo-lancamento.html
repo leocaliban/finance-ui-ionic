@@ -15,7 +15,7 @@
 
         <ion-item class="bod">
           <ion-label>Tipo</ion-label>
-          <ion-select #group>
+          <ion-select #group interface="popover">
             <ion-option value="{{tipo.value}}" *ngFor="let tipo of tipos">{{tipo.label}}</ion-option>
           </ion-select>
         </ion-item>
@@ -68,19 +68,19 @@
 
       <ion-row>
         <ion-item class="bod">
-          <ion-label floating>
-            Categoria
-          </ion-label>
-          <ion-input name='categoria' type="text"></ion-input>
+          <ion-label>Categoria</ion-label>
+          <ion-select submitText="Okay" cancelText="Cancelar">
+            <ion-option value="{{categoria.value}}" *ngFor="let categoria of categorias">{{categoria.label}}</ion-option>
+          </ion-select>
         </ion-item>
       </ion-row>
 
       <ion-row>
         <ion-item class="bod">
-          <ion-label floating>
-            Pessoa
-          </ion-label>
-          <ion-input name='pessoa' type="text"></ion-input>
+          <ion-label>Pessoa</ion-label>
+          <ion-select submitText="Okay" cancelText="Cancelar">
+            <ion-option value="{{pessoa.value}}" *ngFor="let pessoa of pessoas">{{pessoa.label}}</ion-option>
+          </ion-select>
         </ion-item>
       </ion-row>
 
