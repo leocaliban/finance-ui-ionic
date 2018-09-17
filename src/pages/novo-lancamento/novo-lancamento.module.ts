@@ -8,6 +8,7 @@ import { NovoLancamentoPage } from './novo-lancamento';
   ],
   imports: [
     IonicPageModule.forChild(NovoLancamentoPage),
+
   ],
 })
 export class NovoLancamentoPageModule {}

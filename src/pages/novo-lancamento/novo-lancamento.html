@@ -18,7 +18,8 @@
             <ion-label floating>
               Vencimento
             </ion-label>
-            <ion-input name='vencimento' type="text"></ion-input>
+            <ion-datetime pickerFormat="DD MMMM YYYY" displayFormat="DD MMM YYYY" doneText="CONFIRMAR" cancelText="CANCELAR" max="2030-12-01">
+            </ion-datetime>
           </ion-item>
         </ion-col>
 
@@ -27,7 +28,8 @@
             <ion-label floating>
               Recebimento
             </ion-label>
-            <ion-input name='recebimento' type="text"></ion-input>
+            <ion-datetime pickerFormat="DD MMMM YYYY" displayFormat="DD MMM YYYY" doneText="CONFIRMAR" cancelText="CANCELAR" max="2030-12-01">
+            </ion-datetime>
           </ion-item>
         </ion-col>
 
@@ -78,7 +80,7 @@
         </ion-item>
       </ion-row>
 
-      <ion-row style="margin-top: 20px;" >
+      <ion-row style="margin-top: 20px;">
         <ion-col>
           <button ion-button round icon-start color="secondary">
             <ion-icon name="md-checkmark-circle-outline"></ion-icon>
