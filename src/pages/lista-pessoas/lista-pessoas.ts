@@ -48,4 +48,8 @@ export class ListaPessoasPage {
     console.log('ionViewDidLoad ListaPessoasPage');
   }
 
+  public criar() {
+    this.navCtrl.push('NovaPessoaPage');
+  }
+
 }

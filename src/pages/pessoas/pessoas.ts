@@ -19,4 +19,8 @@ export class PessoasPage {
     this.navCtrl.push('ListaPessoasPage');
   }
 
+  public criar() {
+    this.navCtrl.push('NovaPessoaPage');
+  }
+
 }
