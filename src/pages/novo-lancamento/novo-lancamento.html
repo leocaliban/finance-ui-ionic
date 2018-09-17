@@ -62,7 +62,7 @@
           <ion-label floating>
             Valor
           </ion-label>
-          <ion-input name='valor' type="text"></ion-input>
+          <ion-input type="text" name="money" [brmasker]="{money: true, thousand: '.',  decimalCaracter: ','}"></ion-input>
         </ion-item>
       </ion-row>
 

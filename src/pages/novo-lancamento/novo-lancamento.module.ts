@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { NovoLancamentoPage } from './novo-lancamento';
+import { BrMaskerModule } from 'brmasker-ionic-3';
 
 @NgModule({
   declarations: [
@@ -8,6 +9,7 @@ import { NovoLancamentoPage } from './novo-lancamento';
   ],
   imports: [
     IonicPageModule.forChild(NovoLancamentoPage),
+    BrMaskerModule
 
   ],
 })
