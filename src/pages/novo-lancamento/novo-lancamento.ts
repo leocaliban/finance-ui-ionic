@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @IonicPage()
 @Component({
@@ -8,6 +9,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class NovoLancamentoPage {
 
+  formGroup: FormGroup;
   tipos = [
     { label: 'Receita', value: 'RECEITA'},
     { label: 'Despesa', value: 'DESPESA'}
@@ -24,7 +26,15 @@ export class NovoLancamentoPage {
     { label: 'Kim Bauer', value: '3'}
   ];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public formBuilder: FormBuilder,
+    public alertCtlr: AlertController) {
+
+      this.formGroup = this.formBuilder.group({//Definir as validações dos campos do form
+        descricao: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(120)]]
+      });
   }
 
   ionViewDidLoad() {

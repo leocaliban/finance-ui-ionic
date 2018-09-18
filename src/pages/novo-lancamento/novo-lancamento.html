@@ -10,7 +10,7 @@
 
 <ion-content padding class="bod">
   <ion-grid>
-    <form action="">
+    <form [formGroup]='formGroup'>
       <ion-row>
 
         <ion-item class="bod">
@@ -53,8 +53,12 @@
           <ion-label floating>
             Descrição
           </ion-label>
-          <ion-input name='descricao' type="text"></ion-input>
+          <ion-input type="text" formControlName='descricao' required minlength="5"></ion-input>
         </ion-item>
+        <p class='danger' *ngIf="formGroup.controls['descricao'].dirty && formGroup.controls['descricao'].errors"
+          margin-left>
+          Informe uma descrição com no mínimo 5 caracteres.
+        </p>
       </ion-row>
 
       <ion-row>

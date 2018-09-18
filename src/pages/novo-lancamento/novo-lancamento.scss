@@ -7,4 +7,14 @@ page-novo-lancamento {
   .bod{
     background: rgb(248, 255, 249);
   }
+
+  .danger{
+    color: rgb(255, 255, 255);
+    font-size: 75%;
+    background-color: rgb(245, 105, 117);
+    border-radius: 10px;
+    padding: 5px;
+    margin-top: 2px;
+    margin-bottom: 0px;
+  }
 }
