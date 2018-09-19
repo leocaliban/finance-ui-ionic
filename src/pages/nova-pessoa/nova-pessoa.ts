@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the NovaPessoaPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 @IonicPage()
 @Component({
@@ -15,7 +9,23 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class NovaPessoaPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  formGroup: FormGroup;
+
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public formBuilder: FormBuilder,
+    public alertCtlr: AlertController) {
+
+      this.formGroup = this.formBuilder.group({//Definir as validações dos campos do form
+        nome: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
+        logradouro: ['', [Validators.required]],
+        numero: ['', [Validators.required]],
+        bairro: ['', [Validators.required]],
+        cep: ['', [Validators.required]],
+        estado: ['', [Validators.required]],
+        cidade: ['', [Validators.required]]
+      });
   }
 
   ionViewDidLoad() {

@@ -15,10 +15,13 @@
 
         <ion-item class="bod">
           <ion-label>Tipo</ion-label>
-          <ion-select #group interface="popover">
+          <ion-select #group interface="popover" formControlName='tipo' required>
             <ion-option value="{{tipo.value}}" *ngFor="let tipo of tipos">{{tipo.label}}</ion-option>
           </ion-select>
         </ion-item>
+        <p class='danger' *ngIf="formGroup.controls['tipo'].dirty && formGroup.controls['tipo'].errors" margin-left>
+          Selecione um tipo de lançamento.
+        </p>
 
       </ion-row>
 
@@ -30,9 +33,13 @@
               Vencimento
             </ion-label>
             <ion-datetime pickerFormat="DD MMMM YYYY" displayFormat="DD MMM YYYY" doneText="CONFIRMAR" cancelText="CANCELAR"
-              max="2030-12-01">
+              max="2030-12-01" formControlName='vencimento' required>
             </ion-datetime>
           </ion-item>
+          <p class='danger' *ngIf="formGroup.controls['vencimento'].dirty && formGroup.controls['vencimento'].errors"
+            margin-left>
+            Selecione uma data de vencimento.
+          </p>
         </ion-col>
 
         <ion-col>
@@ -66,26 +73,37 @@
           <ion-label floating>
             Valor
           </ion-label>
-          <ion-input type="text" name="money" [brmasker]="{money: true, thousand: '.',  decimalCaracter: ','}"></ion-input>
+          <ion-input type="text" name="money" [brmasker]="{money: true, thousand: '.',  decimalCaracter: ','}"
+            formControlName='valor' required></ion-input>
         </ion-item>
+        <p class='danger' *ngIf="formGroup.controls['valor'].dirty && formGroup.controls['valor'].errors" margin-left>
+          Informe o valor.
+        </p>
       </ion-row>
 
       <ion-row>
         <ion-item class="bod">
           <ion-label>Categoria</ion-label>
-          <ion-select submitText="Okay" cancelText="Cancelar">
+          <ion-select submitText="Okay" cancelText="Cancelar" formControlName='categoria' required>
             <ion-option value="{{categoria.value}}" *ngFor="let categoria of categorias">{{categoria.label}}</ion-option>
           </ion-select>
         </ion-item>
+        <p class='danger' *ngIf="formGroup.controls['categoria'].dirty && formGroup.controls['categoria'].errors"
+          margin-left>
+          Selecione uma categoria.
+        </p>
       </ion-row>
 
       <ion-row>
         <ion-item class="bod">
           <ion-label>Pessoa</ion-label>
-          <ion-select submitText="Okay" cancelText="Cancelar">
+          <ion-select submitText="Okay" cancelText="Cancelar" formControlName='pessoa' required>
             <ion-option value="{{pessoa.value}}" *ngFor="let pessoa of pessoas">{{pessoa.label}}</ion-option>
           </ion-select>
         </ion-item>
+        <p class='danger' *ngIf="formGroup.controls['pessoa'].dirty && formGroup.controls['pessoa'].errors" margin-left>
+          Selecione uma pessoa.
+        </p>
       </ion-row>
 
       <ion-row>
@@ -99,7 +117,7 @@
 
       <ion-row style="margin-top: 20px;">
         <ion-col>
-          <button ion-button round icon-start color="secondary">
+          <button ion-button round icon-start color="secondary" [disabled]='formGroup.invalid'>
             <ion-icon name="md-checkmark-circle-outline"></ion-icon>
             SALVAR
           </button>

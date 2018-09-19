@@ -10,15 +10,18 @@
 
 <ion-content padding class="bod">
   <ion-grid>
-    <form action="">
+    <form [formGroup]='formGroup'>
 
       <ion-row>
         <ion-item class="bod">
           <ion-label floating>
             Nome
           </ion-label>
-          <ion-input name='nome' type="text"></ion-input>
+          <ion-input type="text" formControlName='nome' required minlength="5"></ion-input>
         </ion-item>
+        <p class='danger' *ngIf="formGroup.controls['nome'].dirty && formGroup.controls['nome'].errors" margin-left>
+          Informe um nome com no mínimo 5 caracteres.
+        </p>
       </ion-row>
 
       <ion-row>
@@ -26,8 +29,12 @@
           <ion-label floating>
             Logradouro
           </ion-label>
-          <ion-input name='logradouro' type="text"></ion-input>
+          <ion-input type="text" formControlName='logradouro' required></ion-input>
         </ion-item>
+        <p class='danger' *ngIf="formGroup.controls['logradouro'].dirty && formGroup.controls['logradouro'].errors"
+          margin-left>
+          Informe o logradouro.
+        </p>
       </ion-row>
 
       <ion-row>
@@ -35,8 +42,11 @@
           <ion-label floating>
             Número
           </ion-label>
-          <ion-input name='numero' type="text"></ion-input>
+          <ion-input type="text" formControlName='numero' required></ion-input>
         </ion-item>
+        <p class='danger' *ngIf="formGroup.controls['numero'].dirty && formGroup.controls['numero'].errors" margin-left>
+          Informe o logradouro.
+        </p>
       </ion-row>
 
       <ion-row>
@@ -53,8 +63,11 @@
           <ion-label floating>
             Bairro
           </ion-label>
-          <ion-input name='bairro' type="text"></ion-input>
+          <ion-input type="text" formControlName='bairro' required></ion-input>
         </ion-item>
+        <p class='danger' *ngIf="formGroup.controls['bairro'].dirty && formGroup.controls['bairro'].errors" margin-left>
+          Informe o bairro.
+        </p>
       </ion-row>
 
       <ion-row>
@@ -62,9 +75,12 @@
           <ion-label floating>
             CEP
           </ion-label>
-          <ion-input type="text" name="cep" [brmasker]="{mask:'00.000-000', len:10, type:'num' }"></ion-input>
+          <ion-input type="text" [brmasker]="{mask:'00.000-000', len:10, type:'num' }" formControlName='cep' required></ion-input>
 
         </ion-item>
+        <p class='danger' *ngIf="formGroup.controls['cep'].dirty && formGroup.controls['cep'].errors" margin-left>
+          Informe o CEP.
+        </p>
       </ion-row>
 
       <ion-row>
@@ -72,8 +88,11 @@
           <ion-label floating>
             Cidade
           </ion-label>
-          <ion-input name='cidade' type="text"></ion-input>
+          <ion-input type="text" formControlName='cidade' required></ion-input>
         </ion-item>
+        <p class='danger' *ngIf="formGroup.controls['cidade'].dirty && formGroup.controls['cidade'].errors" margin-left>
+          Informe a cidade.
+        </p>
       </ion-row>
 
       <ion-row>
@@ -81,13 +100,16 @@
           <ion-label floating>
             Estado
           </ion-label>
-          <ion-input name='estado' type="text"></ion-input>
+          <ion-input type="text" formControlName='estado' required></ion-input>
         </ion-item>
+        <p class='danger' *ngIf="formGroup.controls['estado'].dirty && formGroup.controls['estado'].errors" margin-left>
+          Informe o estado.
+        </p>
       </ion-row>
 
       <ion-row style="margin-top: 20px;">
         <ion-col>
-          <button ion-button round icon-start color="secondary">
+          <button ion-button round icon-start color="secondary" [disabled]='formGroup.invalid'>
             <ion-icon name="md-checkmark-circle-outline"></ion-icon>
             SALVAR
           </button>

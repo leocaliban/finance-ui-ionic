@@ -33,7 +33,12 @@ export class NovoLancamentoPage {
     public alertCtlr: AlertController) {
 
       this.formGroup = this.formBuilder.group({//Definir as validações dos campos do form
-        descricao: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(120)]]
+        tipo: ['', [Validators.required]],
+        vencimento: ['', [Validators.required]],
+        descricao: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
+        valor: ['', [Validators.required]],
+        categoria: ['', [Validators.required]],
+        pessoa: ['', [Validators.required]]
       });
   }
 
