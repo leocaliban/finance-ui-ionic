@@ -8,7 +8,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class LancamentosPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  lancamentos =[];
+
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,) {
   }
 
   ionViewDidLoad() {
@@ -16,7 +20,7 @@ export class LancamentosPage {
   }
 
   public pesquisar() {
-    this.navCtrl.push('ListaLancamentosPage');
+    this.navCtrl.push('ListaLancamentosPage', {filtro: ''});
   }
 
   public criar() {

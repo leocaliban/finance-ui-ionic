@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { LancamentoService } from '../../services/domain/lancamento.service';
 
 
 @IonicPage()
@@ -9,58 +10,28 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ListaLancamentosPage {
 
-  lancamentos = [
-    {
-      tipo: 'DESPESA',
-      descricao: 'Compra de pão',
-      dataVencimento: new Date(2017, 6, 30),
-      dataPagamento: null,
-      valor: 4.55,
-      pessoa: 'Padaria Pão Novo'
-    },
-    {
-      tipo: 'RECEITA',
-      descricao: 'Aluguel',
-      dataVencimento: new Date(2018, 3, 11),
-      dataPagamento: new Date(2018, 3, 11),
-      valor: 220.00,
-      pessoa: 'Jack Bauer'
-    },
-    {
-      tipo: 'DESPESA',
-      descricao: 'Conta de Água',
-      dataVencimento: new Date(2018, 5, 11),
-      dataPagamento: null,
-      valor: 100.00,
-      pessoa: 'James Lancer'
-    },
-    {
-      tipo: 'RECEITA',
-      descricao: 'Salário',
-      dataVencimento: new Date(2018, 9, 11),
-      dataPagamento: new Date(2018, 6, 19),
-      valor: 990.00,
-      pessoa: 'Rafael Lima'
-    },
-    {
-      tipo: 'DESPESA',
-      descricao: 'Cervejas',
-      dataVencimento: new Date(2018, 5, 4),
-      dataPagamento: new Date(2018, 5, 4),
-      valor: 90000.00,
-      pessoa: 'Zeca'
-    }
-  ];
+  filtro: string;
+  lancamentos = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    private lancamentoService: LancamentoService) {
+
+    this.filtro = this.navParams.get('filtro');
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ListaLancamentosPage');
+    this.pesquisar();
   }
 
   public criar() {
     this.navCtrl.push('NovoLancamentoPage');
+  }
+
+  pesquisar() {
+    if(this.filtro != null || this.filtro.length === 0 || this.filtro === null){
+      this.lancamentoService.pesquisar().then(lancamentos => this.lancamentos = lancamentos);
+    }
   }
 
   getCorValor(evento: any) {
