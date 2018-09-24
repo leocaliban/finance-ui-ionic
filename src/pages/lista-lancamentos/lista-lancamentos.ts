@@ -10,14 +10,14 @@ import { LancamentoService } from '../../services/domain/lancamento.service';
 })
 export class ListaLancamentosPage {
 
-  filtro: string;
+  descricao: string;
   lancamentos = [];
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private lancamentoService: LancamentoService) {
 
-    this.filtro = this.navParams.get('filtro');
+    this.descricao = this.navParams.get('descricao');
   }
 
   ionViewDidLoad() {
@@ -29,9 +29,8 @@ export class ListaLancamentosPage {
   }
 
   pesquisar() {
-    if(this.filtro != null || this.filtro.length === 0 || this.filtro === null){
-      this.lancamentoService.pesquisar().then(lancamentos => this.lancamentos = lancamentos);
-    }
+    this.lancamentoService.pesquisar({ descricao: this.descricao }).then(lancamentos => this.lancamentos = lancamentos);
+
   }
 
   getCorValor(evento: any) {

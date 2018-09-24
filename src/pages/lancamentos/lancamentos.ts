@@ -8,6 +8,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class LancamentosPage {
 
+  descricao: string;
   lancamentos =[];
 
   constructor(
@@ -20,7 +21,7 @@ export class LancamentosPage {
   }
 
   public pesquisar() {
-    this.navCtrl.push('ListaLancamentosPage', {filtro: ''});
+    this.navCtrl.push('ListaLancamentosPage', { descricao: this.descricao });
   }
 
   public criar() {

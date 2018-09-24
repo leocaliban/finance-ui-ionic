@@ -19,14 +19,14 @@
     <ion-row>
       <ion-col col-12>
         <ion-grid>
-          <form action="">
+          <form autocomplete="off" (ngSubmit)="pesquisar()">
             <ion-row>
               <ion-col col-11>
                 <ion-item class="bod">
                   <ion-label floating>
                     Descrição
                   </ion-label>
-                  <ion-input name='descricao' type="text"></ion-input>
+                  <ion-input name='descricao' type="text" [(ngModel)]="descricao"></ion-input>
                 </ion-item>
                 <h4>Vencimento</h4>
                 <ion-row>
