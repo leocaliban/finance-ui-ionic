@@ -1,8 +1,12 @@
 import { Http, Headers, URLSearchParams } from '@angular/http';
 import { Injectable } from "@angular/core";
 
+import * as moment from 'moment';
+
 export interface LancamentoFiltro {
   descricao: string;
+  dataVencimentoInicio: Date;
+  dataVencimentoFim: Date;
 }
 
 @Injectable()
@@ -22,6 +26,14 @@ export class LancamentoService {
 
     if (filtro.descricao) { // Se vier alguma informação no filtro
       parametros.set('descricao', filtro.descricao); // Adicine a informação do filtro no valor
+    }
+
+    if (filtro.dataVencimentoInicio) {
+      parametros.set('dataVencimentoDe', moment(filtro.dataVencimentoInicio).format('YYYY-MM-DD'));
+    }
+
+    if (filtro.dataVencimentoFim) {
+      parametros.set('dataVencimentoAte', moment(filtro.dataVencimentoFim).format('YYYY-MM-DD'));
     }
 
     return this.http.get(`${this.lancamentosUrl}?resumo`, { headers, search: parametros })

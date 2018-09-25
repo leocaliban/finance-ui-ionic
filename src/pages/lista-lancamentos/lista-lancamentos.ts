@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { LancamentoService } from '../../services/domain/lancamento.service';
+import { LancamentoService, LancamentoFiltro } from '../../services/domain/lancamento.service';
 
 
 @IonicPage()
@@ -10,14 +10,14 @@ import { LancamentoService } from '../../services/domain/lancamento.service';
 })
 export class ListaLancamentosPage {
 
-  descricao: string;
+  filtro: LancamentoFiltro;
   lancamentos = [];
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private lancamentoService: LancamentoService) {
 
-    this.descricao = this.navParams.get('descricao');
+    this.filtro = this.navParams.get('filtro');
   }
 
   ionViewDidLoad() {
@@ -29,8 +29,7 @@ export class ListaLancamentosPage {
   }
 
   pesquisar() {
-    this.lancamentoService.pesquisar({ descricao: this.descricao }).then(lancamentos => this.lancamentos = lancamentos);
-
+    this.lancamentoService.pesquisar(this.filtro).then(lancamentos => this.lancamentos = lancamentos);
   }
 
   getCorValor(evento: any) {

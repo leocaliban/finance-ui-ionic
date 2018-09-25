@@ -21,7 +21,7 @@
         <ion-grid>
           <form autocomplete="off" (ngSubmit)="pesquisar()">
             <ion-row>
-              <ion-col col-11>
+              <ion-col col-12>
                 <ion-item class="bod">
                   <ion-label floating>
                     Descrição
@@ -30,14 +30,18 @@
                 </ion-item>
                 <h4>Vencimento</h4>
                 <ion-row>
-                  <ion-col col-6 class="no-padding-l">
+                  <ion-col>
                     <ion-item class="bod">
-                      <ion-input type="text" placeholder="De"></ion-input>
+                      <ion-datetime placeholder="De" pickerFormat="DD MMMM YYYY" displayFormat="DD MMMM YYYY" doneText="CONFIRMAR"
+                        cancelText="CANCELAR" max="2030-12-01" name="dataVencimentoInicio" [(ngModel)]="dataVencimentoInicio">
+                      </ion-datetime>
                     </ion-item>
                   </ion-col>
-                  <ion-col col-6 class="no-padding-r">
+                  <ion-col>
                     <ion-item class="bod">
-                      <ion-input type="text" placeholder="Até"></ion-input>
+                      <ion-datetime placeholder="Até" pickerFormat="DD MMMM YYYY" displayFormat="DD MMMM YYYY" doneText="CONFIRMAR"
+                        cancelText="CANCELAR" max="2030-12-01" name="dataVencimentoFim" [(ngModel)]="dataVencimentoFim">
+                      </ion-datetime>
                     </ion-item>
                   </ion-col>
                 </ion-row>

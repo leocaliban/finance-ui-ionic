@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { LancamentoFiltro } from '../../services/domain/lancamento.service';
 
 @IonicPage()
 @Component({
@@ -9,11 +10,13 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class LancamentosPage {
 
   descricao: string;
-  lancamentos =[];
+  dataVencimentoInicio: Date;
+  dataVencimentoFim: Date;
+  lancamentos = [];
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams,) {
+    public navParams: NavParams, ) {
   }
 
   ionViewDidLoad() {
@@ -21,7 +24,12 @@ export class LancamentosPage {
   }
 
   public pesquisar() {
-    this.navCtrl.push('ListaLancamentosPage', { descricao: this.descricao });
+    const filtro: LancamentoFiltro = {
+      descricao: this.descricao,
+      dataVencimentoInicio: this.dataVencimentoInicio,
+      dataVencimentoFim: this.dataVencimentoFim
+    };
+    this.navCtrl.push('ListaLancamentosPage', { filtro: filtro });
   }
 
   public criar() {
