@@ -9,6 +9,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { LancamentoService } from '../services/domain/lancamento.service';
 import { HttpModule } from '@angular/http';
 
+
 @NgModule({
   declarations: [
     MyApp

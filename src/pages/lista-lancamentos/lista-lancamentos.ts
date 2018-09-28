@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { LancamentoService, LancamentoFiltro } from '../../services/domain/lancamento.service';
 
 
@@ -11,25 +11,76 @@ import { LancamentoService, LancamentoFiltro } from '../../services/domain/lanca
 export class ListaLancamentosPage {
 
   filtro: LancamentoFiltro;
-  lancamentos = [];
+  lancamentos = [] = [];
+  loader: any;
+
+  pagina: number = 0;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    private lancamentoService: LancamentoService) {
+    private lancamentoService: LancamentoService,
+    public loadingController: LoadingController) {
 
     this.filtro = this.navParams.get('filtro');
   }
 
   ionViewDidLoad() {
+    this.loader = this.loading();
     this.pesquisar();
   }
 
-  public criar() {
-    this.navCtrl.push('NovoLancamentoPage');
-  }
 
   pesquisar() {
-    this.lancamentoService.pesquisar(this.filtro).then(lancamentos => this.lancamentos = lancamentos);
+    this.lancamentoService.pesquisar(this.filtro, this.pagina, 5).then(lancamentos => {
+      this.lancamentos = this.lancamentos.concat(lancamentos);
+      this.loader.dismiss();
+
+    })
+  }
+
+  /**
+   * Configura o refresh da lista
+   * @param refresher ionRefresh
+   */
+  atualizar(refresher) {
+    setTimeout(() => {
+      this.pesquisar();
+      refresher.complete();
+    }, 1500);
+  }
+
+  /**
+   * Configura o loading ao entrar na página
+   */
+  loading() {
+    let loader = this.loadingController.create({
+      spinner: 'hide',
+      content:
+        `
+      <img src="assets/imgs/load.gif" alt="logo">
+      `
+    });
+    loader.present();
+    return loader;
+  }
+
+  /**
+   * Configura infiniteScroll para paginação
+   * @param infiniteScroll infiniteScroll
+   */
+  doInfinite(infiniteScroll) {
+    this.pagina++;
+    this.pesquisar();
+    setTimeout(() => {
+      infiniteScroll.complete();
+    }, 1000);
+  }
+
+  /**
+   * Navega para a página NovoLancamentoPage
+   */
+  public criar() {
+    this.navCtrl.push('NovoLancamentoPage');
   }
 
   getCorValor(evento: any) {
@@ -39,5 +90,6 @@ export class ListaLancamentosPage {
       return 'blue';
     }
   }
+
 
 }

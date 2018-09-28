@@ -4,10 +4,11 @@ import { ListaLancamentosPage } from './lista-lancamentos';
 
 @NgModule({
   declarations: [
-    ListaLancamentosPage,
+    ListaLancamentosPage
   ],
   imports: [
-    IonicPageModule.forChild(ListaLancamentosPage),
+    IonicPageModule.forChild(ListaLancamentosPage)
+
   ],
 })
 export class ListaLancamentosPageModule {}
