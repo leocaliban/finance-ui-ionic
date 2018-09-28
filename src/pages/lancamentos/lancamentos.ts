@@ -12,7 +12,6 @@ export class LancamentosPage {
   descricao: string;
   dataVencimentoInicio: Date;
   dataVencimentoFim: Date;
-  lancamentos = [];
 
   constructor(
     public navCtrl: NavController,

@@ -19,14 +19,14 @@
     <ion-row>
       <ion-col col-12>
         <ion-grid>
-          <form action="">
+          <form autocomplete="off" (ngSubmit)="pesquisar()">
             <ion-row>
               <ion-col col-11>
                 <ion-item class="bod">
                   <ion-label floating>
                     Nome
                   </ion-label>
-                  <ion-input name='nome' type="text"></ion-input>
+                  <ion-input name='nome' type="text" [(ngModel)]="filtro.nome"></ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>

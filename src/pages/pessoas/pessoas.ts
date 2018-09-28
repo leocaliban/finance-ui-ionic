@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { PessoaFiltro } from '../../services/domain/pessoa.service';
 
 @IonicPage()
 @Component({
@@ -8,7 +9,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class PessoasPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  filtro = new PessoaFiltro();
+
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
@@ -16,7 +21,7 @@ export class PessoasPage {
   }
 
   public pesquisar() {
-    this.navCtrl.push('ListaPessoasPage');
+    this.navCtrl.push('ListaPessoasPage',{ filtro: this.filtro });
   }
 
   public criar() {

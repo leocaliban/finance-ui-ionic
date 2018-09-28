@@ -15,6 +15,9 @@
 </ion-header>
 
 <ion-content padding class="bod">
+  <ion-refresher (ionRefresh)="atualizar($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-card *ngFor='let pessoa of pessoas'>
 
     <ion-item-divider color="light">
@@ -48,5 +51,7 @@
       </ion-item>
     </ion-list>
   </ion-card>
-
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
