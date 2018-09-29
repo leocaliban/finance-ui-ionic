@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 import { LancamentoService, LancamentoFiltro } from '../../services/domain/lancamento.service';
 
 
@@ -19,7 +19,8 @@ export class ListaLancamentosPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private lancamentoService: LancamentoService,
-    public loadingController: LoadingController) {
+    public loadingController: LoadingController,
+    private toastCtrl: ToastController) {
 
     this.filtro = this.navParams.get('filtro');
   }
@@ -41,6 +42,7 @@ export class ListaLancamentosPage {
     this.loader = this.loading();
     this.lancamentoService.excluir(lancamento.codigo)
       .then(() => {
+        this.mensagemSucesso();
         this.pagina = 0;
         this.lancamentos = [];
         this.pesquisar();
@@ -84,6 +86,22 @@ export class ListaLancamentosPage {
     setTimeout(() => {
       infiniteScroll.complete();
     }, 1000);
+  }
+
+  mensagemSucesso() {
+    let toast = this.toastCtrl.create({
+      message: 'Lançamento excluído com sucesso!',
+      duration: 3000,
+      position: 'top',
+      showCloseButton: true,
+      closeButtonText: 'Ok'
+    });
+
+    toast.onDidDismiss(() => {
+
+    });
+
+    toast.present();
   }
 
   /**
