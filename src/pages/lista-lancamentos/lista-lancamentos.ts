@@ -34,8 +34,18 @@ export class ListaLancamentosPage {
     this.lancamentoService.pesquisar(this.filtro, this.pagina, 5).then(lancamentos => {
       this.lancamentos = this.lancamentos.concat(lancamentos);
       this.loader.dismiss();
+    });
+  }
 
-    })
+  excluir(lancamento: any) {
+    this.loader = this.loading();
+    this.lancamentoService.excluir(lancamento.codigo)
+      .then(() => {
+        this.pagina = 0;
+        this.lancamentos = [];
+        this.pesquisar();
+
+      });
   }
 
   /**

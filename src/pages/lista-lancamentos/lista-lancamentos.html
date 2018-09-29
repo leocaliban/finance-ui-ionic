@@ -19,13 +19,14 @@
   <ion-refresher (ionRefresh)="atualizar($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
+
   <img [hidden]="lancamentos.length != 0" src="assets/imgs/sem-lancamento.png">
   <ion-card *ngFor='let lancamento of lancamentos'>
     <ion-item-divider color="light">
       <button ion-button clear icon-only item-end>
         <ion-icon name='md-create'></ion-icon>
       </button>
-      <button ion-button clear icon-only item-end color="danger">
+      <button ion-button clear icon-only item-end color="danger" (click)="excluir(lancamento)">
         <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
       </button>
     </ion-item-divider>
