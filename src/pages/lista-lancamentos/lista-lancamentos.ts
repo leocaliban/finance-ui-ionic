@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController, AlertController } from 'ionic-angular';
 import { LancamentoService, LancamentoFiltro } from '../../services/domain/lancamento.service';
+import { ErrorHandlerService } from '../../services/error-handler.service';
 
 
 @IonicPage()
@@ -21,7 +22,8 @@ export class ListaLancamentosPage {
     private lancamentoService: LancamentoService,
     public loadingController: LoadingController,
     private toastCtrl: ToastController,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController,
+    private errorHandler: ErrorHandlerService) {
 
     this.filtro = this.navParams.get('filtro');
   }
@@ -36,7 +38,8 @@ export class ListaLancamentosPage {
     this.lancamentoService.pesquisar(this.filtro, this.pagina, 5).then(lancamentos => {
       this.lancamentos = this.lancamentos.concat(lancamentos);
       this.loader.dismiss();
-    });
+    })
+    .catch(erro => this.errorHandler.handle(erro));
   }
 
   excluir(lancamento: any) {
@@ -48,7 +51,8 @@ export class ListaLancamentosPage {
         this.lancamentos = [];
         this.pesquisar();
 
-      });
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
   confirmarExclusao(lancamento: any) {
