@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController, AlertController } from 'ionic-angular';
 import { LancamentoService, LancamentoFiltro } from '../../services/domain/lancamento.service';
 
 
@@ -20,7 +20,8 @@ export class ListaLancamentosPage {
     public navParams: NavParams,
     private lancamentoService: LancamentoService,
     public loadingController: LoadingController,
-    private toastCtrl: ToastController) {
+    private toastCtrl: ToastController,
+    public alertCtrl: AlertController) {
 
     this.filtro = this.navParams.get('filtro');
   }
@@ -48,6 +49,26 @@ export class ListaLancamentosPage {
         this.pesquisar();
 
       });
+  }
+
+  confirmarExclusao(lancamento: any) {
+    const confirm = this.alertCtrl.create({
+      title: 'Confirmação',
+      message: 'Tem certeza que deseja excluir?',
+      buttons: [
+        {
+          text: 'Sim',
+          handler: () => {
+            this.excluir(lancamento);
+          }
+        },
+        {
+          text: 'Não',
+          handler: () => { }
+        }
+      ]
+    });
+    confirm.present();
   }
 
   /**
