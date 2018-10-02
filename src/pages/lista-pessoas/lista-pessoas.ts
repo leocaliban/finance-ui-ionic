@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController, AlertController } from 'ionic-angular';
 import { PessoaFiltro, PessoaService } from '../../services/domain/pessoa.service';
 
 @IonicPage()
@@ -19,7 +19,8 @@ export class ListaPessoasPage {
     public navParams: NavParams,
     private pessoaService: PessoaService,
     public loadingController: LoadingController,
-    private toastCtrl: ToastController) {
+    private toastCtrl: ToastController,
+    public alertCtrl: AlertController) {
 
     this.filtro = this.navParams.get('filtro');
   }
@@ -46,6 +47,26 @@ export class ListaPessoasPage {
         this.pessoas = [];
         this.pesquisar();
       })
+  }
+
+  confirmarExclusao(pessoa: any) {
+    const confirm = this.alertCtrl.create({
+      title: 'Confirmação',
+      message: 'Tem certeza que deseja excluir?',
+      buttons: [
+        {
+          text: 'Sim',
+          handler: () => {
+            this.excluir(pessoa);
+          }
+        },
+        {
+          text: 'Não',
+          handler: () => { }
+        }
+      ]
+    });
+    confirm.present();
   }
 
   atualizar(refresher) {
