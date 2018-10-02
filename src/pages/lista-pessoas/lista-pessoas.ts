@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 import { PessoaFiltro, PessoaService } from '../../services/domain/pessoa.service';
 
 @IonicPage()
@@ -18,7 +18,8 @@ export class ListaPessoasPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private pessoaService: PessoaService,
-    public loadingController: LoadingController) {
+    public loadingController: LoadingController,
+    private toastCtrl: ToastController) {
 
     this.filtro = this.navParams.get('filtro');
   }
@@ -40,6 +41,7 @@ export class ListaPessoasPage {
     this.loader = this.loading();
     this.pessoaService.excluir(pessoa.codigo)
       .then(() => {
+        this.mensagemSucesso();
         this.pagina = 0;
         this.pessoas = [];
         this.pesquisar();
@@ -73,6 +75,19 @@ export class ListaPessoasPage {
     setTimeout(() => {
       infiniteScroll.complete();
     }, 1000);
+  }
+
+  mensagemSucesso() {
+    let toast = this.toastCtrl.create({
+      message: 'Pessoa excluída com sucesso!',
+      duration: 3000,
+      position: 'top',
+      showCloseButton: true,
+      closeButtonText: 'Ok'
+    });
+     toast.onDidDismiss(() => {
+     });
+     toast.present();
   }
 
   public criar() {
