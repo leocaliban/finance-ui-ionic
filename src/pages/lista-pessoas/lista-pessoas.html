@@ -24,7 +24,7 @@
       <button ion-button clear icon-only item-end>
         <ion-icon name='md-create'></ion-icon>
       </button>
-      <button ion-button clear icon-only item-end color="danger">
+      <button ion-button clear icon-only item-end color="danger" (click)="excluir(pessoa)">
         <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
       </button>
     </ion-item-divider>
@@ -37,12 +37,12 @@
 
       <ion-item>
         <h2 item-start>Cidade</h2>
-        <p item-end>{{pessoa.cidade}}</p>
+        <p item-end>{{pessoa.endereco.cidade}}</p>
       </ion-item>
 
       <ion-item>
         <h2 item-start>Estado</h2>
-        <p item-end>{{pessoa.estado}}</p>
+        <p item-end>{{pessoa.endereco.estado}}</p>
       </ion-item>
 
       <ion-item>

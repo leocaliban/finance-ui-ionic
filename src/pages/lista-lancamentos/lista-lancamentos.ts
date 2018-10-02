@@ -39,7 +39,10 @@ export class ListaLancamentosPage {
       this.lancamentos = this.lancamentos.concat(lancamentos);
       this.loader.dismiss();
     })
-    .catch(erro => this.errorHandler.handle(erro));
+    .catch(erro => {
+      this.loader.dismiss(),
+      this.errorHandler.handle(erro)
+    });
   }
 
   excluir(lancamento: any) {

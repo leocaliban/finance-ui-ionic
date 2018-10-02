@@ -36,6 +36,16 @@ export class ListaPessoasPage {
     })
   }
 
+  excluir(pessoa: any) {
+    this.loader = this.loading();
+    this.pessoaService.excluir(pessoa.codigo)
+      .then(() => {
+        this.pagina = 0;
+        this.pessoas = [];
+        this.pesquisar();
+      })
+  }
+
   atualizar(refresher) {
     setTimeout(() => {
       this.pagina = 0;

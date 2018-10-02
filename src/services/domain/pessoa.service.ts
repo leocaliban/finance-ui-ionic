@@ -41,8 +41,16 @@ export class PessoaService {
       .then(response => response.json().content);
   }
 
+  excluir(codigo: number): Promise<void> {
+    const headers = new Headers();
+    this.adicionarAuthorization(headers);
+    return this.http.delete(`${this.pessoasUrl}/${codigo}`, { headers })
+     .toPromise()
+     .then(() => null);
+ }
+
   adicionarAuthorization(headers: Headers) {
     // tslint:disable-next-line:max-line-length
-    headers.append('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJsZW9jYWxpYmFuQGZpbmFuY2UuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM4MTg1OTk5LCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiIzMmY3OThkOS02ZjcxLTQ0YWQtOTQ2My01ZjVkYmNlODdjYmQiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.H7W2SHXppbbAeWMoKIQexiPN3gdL6qFXrCtalWlilrk');
+    headers.append('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJsZW9jYWxpYmFuQGZpbmFuY2UuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM4NDk3MzAxLCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiI0ZGUzOTI0My1jMzk5LTQwYTUtYThjYS0xMDg4OGViOGI2ZmIiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.xN07i4tSZVklH2rdWNo2YsgoS-0UuITMK7QmzwxdDDA');
   }
 }

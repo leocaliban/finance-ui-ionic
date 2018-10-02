@@ -22,7 +22,7 @@ export class ErrorHandlerService {
   mensagemErro(mensagem) {
     let toast = this.toastCtrl.create({
       message: mensagem,
-      duration: 3000,
+      duration: 4000,
       position: 'top',
       showCloseButton: true,
       closeButtonText: 'Ok'
