@@ -55,7 +55,10 @@ export class ListaLancamentosPage {
         this.pesquisar();
 
       })
-      .catch(erro => this.errorHandler.handle(erro));
+      .catch(erro => {
+        this.loader.dismiss(),
+          this.errorHandler.handle(erro)
+      });
   }
 
   confirmarExclusao(lancamento: any) {

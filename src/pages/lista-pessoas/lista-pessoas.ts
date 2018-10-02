@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController, AlertController } from 'ionic-angular';
 import { PessoaFiltro, PessoaService } from '../../services/domain/pessoa.service';
+import { ErrorHandlerService } from '../../services/error-handler.service';
 
 @IonicPage()
 @Component({
@@ -20,7 +21,8 @@ export class ListaPessoasPage {
     private pessoaService: PessoaService,
     public loadingController: LoadingController,
     private toastCtrl: ToastController,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController,
+    private errorHandler: ErrorHandlerService) {
 
     this.filtro = this.navParams.get('filtro');
   }
@@ -34,8 +36,11 @@ export class ListaPessoasPage {
     this.pessoaService.pesquisarPorNome(this.filtro, this.pagina, 5).then(response => {
       this.pessoas = this.pessoas.concat(response);
       this.loader.dismiss();
-
     })
+      .catch(erro => {
+        this.loader.dismiss(),
+          this.errorHandler.handle(erro)
+      });
   }
 
   excluir(pessoa: any) {
@@ -47,6 +52,10 @@ export class ListaPessoasPage {
         this.pessoas = [];
         this.pesquisar();
       })
+      .catch(erro => {
+        this.loader.dismiss(),
+          this.errorHandler.handle(erro)
+      });
   }
 
   confirmarExclusao(pessoa: any) {
@@ -106,9 +115,9 @@ export class ListaPessoasPage {
       showCloseButton: true,
       closeButtonText: 'Ok'
     });
-     toast.onDidDismiss(() => {
-     });
-     toast.present();
+    toast.onDidDismiss(() => {
+    });
+    toast.present();
   }
 
   public criar() {

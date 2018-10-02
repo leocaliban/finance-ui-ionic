@@ -12,6 +12,7 @@ import { PessoaService } from '../services/domain/pessoa.service';
 
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
+import { ErrorHandlerService } from '../services/error-handler.service';
 registerLocaleData(localePt);
 
 @NgModule({
@@ -38,7 +39,8 @@ registerLocaleData(localePt);
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     { provide: LOCALE_ID, useValue: 'pt' },
     LancamentoService,
-    PessoaService
+    PessoaService,
+    ErrorHandlerService
   ]
 })
 export class AppModule { }

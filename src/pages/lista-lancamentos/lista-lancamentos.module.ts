@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { ListaLancamentosPage } from './lista-lancamentos';
-import { ErrorHandlerService } from '../../services/error-handler.service';
 
 @NgModule({
   declarations: [
@@ -11,6 +10,6 @@ import { ErrorHandlerService } from '../../services/error-handler.service';
     IonicPageModule.forChild(ListaLancamentosPage)
 
   ],
-  providers: [ErrorHandlerService]
+  providers: []
 })
 export class ListaLancamentosPageModule {}
