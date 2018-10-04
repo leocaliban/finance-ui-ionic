@@ -47,7 +47,7 @@
 
       <ion-item>
         <h2 item-start>{{pessoa.ativo ? 'Ativo' : 'Inativo'}}</h2>
-        <ion-toggle value="foo" checked="pessoa.ativo" [(ngModel)]="pessoa.ativo"></ion-toggle>
+        <ion-toggle value="foo" checked="pessoa.ativo" [ngModel]="pessoa.ativo" (ionChange)="mudarStatus(pessoa)"></ion-toggle>
       </ion-item>
     </ion-list>
   </ion-card>

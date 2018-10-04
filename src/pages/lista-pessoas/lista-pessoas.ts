@@ -47,7 +47,8 @@ export class ListaPessoasPage {
     this.loader = this.loading();
     this.pessoaService.excluir(pessoa.codigo)
       .then(() => {
-        this.mensagemSucesso();
+        let mensagem = 'Pessoa excluída com sucesso!';
+        this.mensagemSucesso(mensagem);
         this.pagina = 0;
         this.pessoas = [];
         this.pesquisar();
@@ -56,6 +57,20 @@ export class ListaPessoasPage {
         this.loader.dismiss(),
           this.errorHandler.handle(erro)
       });
+  }
+
+  mudarStatus(pessoa: any): void {
+    const novoStatus = !pessoa.ativo;
+
+    this.pessoaService.mudarStatus(pessoa.codigo, novoStatus)
+      .then(() => {
+        const acao = novoStatus ? 'ativada' : 'desativada';
+
+        pessoa.ativo = novoStatus;
+        let mensagem = `Pessoa ${acao} com sucesso!`;
+        this.mensagemSucesso(mensagem);
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
   confirmarExclusao(pessoa: any) {
@@ -107,9 +122,9 @@ export class ListaPessoasPage {
     }, 1000);
   }
 
-  mensagemSucesso() {
+  mensagemSucesso(mensagem: string) {
     let toast = this.toastCtrl.create({
-      message: 'Pessoa excluída com sucesso!',
+      message: mensagem,
       duration: 3000,
       position: 'top',
       showCloseButton: true,
