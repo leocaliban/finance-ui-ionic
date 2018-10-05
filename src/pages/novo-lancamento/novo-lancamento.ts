@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CategoriaService } from '../../services/domain/categoria.service';
 import { ErrorHandlerService } from '../../services/error-handler.service';
+import { PessoaService } from '../../services/domain/pessoa.service';
 
 @IonicPage()
 @Component({
@@ -18,12 +19,7 @@ export class NovoLancamentoPage {
   ];
 
   categorias = [];
-
-  pessoas = [
-    { label: 'Aline Silva', value: '1' },
-    { label: 'Nina Myers', value: '2' },
-    { label: 'Kim Bauer', value: '3' }
-  ];
+  pessoas = [];
 
   constructor(
     public navCtrl: NavController,
@@ -31,7 +27,8 @@ export class NovoLancamentoPage {
     public formBuilder: FormBuilder,
     public alertCtlr: AlertController,
     private categoriaService: CategoriaService,
-    private errorHandler: ErrorHandlerService) {
+    private errorHandler: ErrorHandlerService,
+    private pessoaService: PessoaService) {
 
     this.formGroup = this.formBuilder.group({//Definir as validações dos campos do form
       tipo: ['', [Validators.required]],
@@ -45,6 +42,7 @@ export class NovoLancamentoPage {
 
   ionViewDidLoad() {
     this.carregarCategorias();
+    this.carregarPessoas();
   }
 
   carregarCategorias() {
@@ -55,6 +53,16 @@ export class NovoLancamentoPage {
         });
       })
       // this.categorias = response.map(c => ({label:c.nome, value: c.codigo}))
+      .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  carregarPessoas() {
+    return this.pessoaService.pesquisarTodos()
+      .then(response => {
+        this.pessoas = response.map(elemento => {
+          return { label: elemento.nome, value: elemento.codigo };
+        });
+      })
       .catch(erro => this.errorHandler.handle(erro));
   }
 
