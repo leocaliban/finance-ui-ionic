@@ -13,6 +13,7 @@ import { PessoaService } from '../services/domain/pessoa.service';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { ErrorHandlerService } from '../services/error-handler.service';
+import { CategoriaService } from '../services/domain/categoria.service';
 registerLocaleData(localePt);
 
 @NgModule({
@@ -40,7 +41,8 @@ registerLocaleData(localePt);
     { provide: LOCALE_ID, useValue: 'pt' },
     LancamentoService,
     PessoaService,
-    ErrorHandlerService
+    ErrorHandlerService,
+    CategoriaService
   ]
 })
 export class AppModule { }
