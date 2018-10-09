@@ -2,6 +2,7 @@ import { Http, Headers, URLSearchParams } from '@angular/http';
 import { Injectable } from "@angular/core";
 
 import * as moment from 'moment';
+import { Lancamento } from '../../models/lancamento';
 
 export interface LancamentoFiltro {
   descricao: string;
@@ -16,6 +17,15 @@ export class LancamentoService {
 
   constructor(public http: Http) {
   }
+
+  salvar(lancamento: Lancamento): Promise<Lancamento> {
+    const headers = new Headers();
+    this.adicionarAuthorization(headers);
+    headers.append('Content-Type', 'application/json');
+     return this.http.post(this.lancamentosUrl, JSON.stringify(lancamento), { headers })
+      .toPromise()
+      .then(response => response.json());
+   }
 
   pesquisar(filtro: LancamentoFiltro, pagina: number = 0, linhasPorPagina: number = 5): Promise<any> {
     const headers = new Headers();
@@ -54,7 +64,7 @@ export class LancamentoService {
 
   adicionarAuthorization(headers: Headers) {
     // tslint:disable-next-line:max-line-length
-    headers.append('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJsZW9jYWxpYmFuQGZpbmFuY2UuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM4NzUyODE4LCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiIxYjRiMjZjNy1jMTZjLTQyYzYtYmQwOS01ODc2ZjM5NzMzNTAiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.ysxrZvbc1dL6_Qd6zX0V5jqlNKUP6myR5VCEeakY4Kc');
+    headers.append('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJsZW9jYWxpYmFuQGZpbmFuY2UuY29tIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sIm5vbWUiOiJBZG1pbmlzdHJhZG9yIiwiZXhwIjoxNTM5MTQxMTk2LCJhdXRob3JpdGllcyI6WyJST0xFX0NBREFTVFJBUl9DQVRFR09SSUEiLCJST0xFX1BFU1FVSVNBUl9QRVNTT0EiLCJST0xFX1JFTU9WRVJfUEVTU09BIiwiUk9MRV9DQURBU1RSQVJfTEFOQ0FNRU5UTyIsIlJPTEVfUEVTUVVJU0FSX0xBTkNBTUVOVE8iLCJST0xFX1JFTU9WRVJfTEFOQ0FNRU5UTyIsIlJPTEVfQ0FEQVNUUkFSX1BFU1NPQSIsIlJPTEVfUEVTUVVJU0FSX0NBVEVHT1JJQSJdLCJqdGkiOiJkMTA5MTBkOC1kMjQ0LTQxZWQtOTNlMS1jYjZjYjIwZWEyZTQiLCJjbGllbnRfaWQiOiJhbmd1bGFyIn0.ahEnWbbS4WAcPvzDzHMd8LCEEiyU7wPtQ5wsq3TGzjY');
   }
 
 }

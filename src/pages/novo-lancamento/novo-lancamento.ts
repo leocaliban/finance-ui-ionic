@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { CategoriaService } from '../../services/domain/categoria.service';
 import { ErrorHandlerService } from '../../services/error-handler.service';
 import { PessoaService } from '../../services/domain/pessoa.service';
+import { LancamentoService } from '../../services/domain/lancamento.service';
+import { Lancamento } from '../../models/lancamento';
 
 @IonicPage()
 @Component({
@@ -20,29 +22,29 @@ export class NovoLancamentoPage {
 
   categorias = [];
   pessoas = [];
+  lancamento = new Lancamento();
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public formBuilder: FormBuilder,
     public alertCtlr: AlertController,
     private categoriaService: CategoriaService,
     private errorHandler: ErrorHandlerService,
-    private pessoaService: PessoaService) {
-
-    this.formGroup = this.formBuilder.group({//Definir as validações dos campos do form
-      tipo: ['', [Validators.required]],
-      vencimento: ['', [Validators.required]],
-      descricao: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
-      valor: ['', [Validators.required]],
-      categoria: ['', [Validators.required]],
-      pessoa: ['', [Validators.required]]
-    });
+    private pessoaService: PessoaService,
+    private lancamentoService: LancamentoService) {
   }
 
   ionViewDidLoad() {
     this.carregarCategorias();
     this.carregarPessoas();
+  }
+
+  salvar() {
+    this.lancamentoService.salvar(this.lancamento)
+      .then(() => {
+        this.showInsertOk();
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
   carregarCategorias() {
@@ -64,6 +66,23 @@ export class NovoLancamentoPage {
         });
       })
       .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  showInsertOk() {
+    let alert = this.alertCtlr.create({
+      title: 'Sucesso!',
+      message: 'Cadastro efetuado com sucesso',
+      enableBackdropDismiss: false,
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {//função anônima
+            this.navCtrl.pop();//desempilhar a página
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
 }

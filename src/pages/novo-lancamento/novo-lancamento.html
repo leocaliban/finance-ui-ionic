@@ -10,16 +10,16 @@
 
 <ion-content padding class="bod">
   <ion-grid>
-    <form [formGroup]='formGroup'>
+    <form #lancamentoForm="ngForm" (ngSubmit)="salvar()">
       <ion-row>
 
         <ion-item class="bod">
           <ion-label>Tipo</ion-label>
-          <ion-select #group interface="popover" formControlName='tipo' required>
+          <ion-select #group interface="popover" name='tipo' #tipoBotao="ngModel" required [(ngModel)]="lancamento.tipo">
             <ion-option value="{{tipo.value}}" *ngFor="let tipo of tipos">{{tipo.label}}</ion-option>
           </ion-select>
         </ion-item>
-        <p class='danger' *ngIf="formGroup.controls['tipo'].dirty && formGroup.controls['tipo'].errors" margin-left>
+        <p class='danger' *ngIf="tipoBotao.hasError('required') && tipoBotao.dirty" margin-left>
           Selecione um tipo de lançamento.
         </p>
 
@@ -33,11 +33,10 @@
               Vencimento
             </ion-label>
             <ion-datetime pickerFormat="DD MMMM YYYY" displayFormat="DD MMM YYYY" doneText="CONFIRMAR" cancelText="CANCELAR"
-              max="2030-12-01" formControlName='vencimento' required>
+              max="2030-12-01" name="dataVencimento" #dataVencimento="ngModel" required [(ngModel)]="lancamento.dataVencimento">
             </ion-datetime>
           </ion-item>
-          <p class='danger' *ngIf="formGroup.controls['vencimento'].dirty && formGroup.controls['vencimento'].errors"
-            margin-left>
+          <p class='danger' *ngIf="dataVencimento.hasError('required') && dataVencimento.dirty" margin-left>
             Selecione uma data de vencimento.
           </p>
         </ion-col>
@@ -48,7 +47,7 @@
               {{group.value === 'RECEITA' ? 'Recebimento' : 'Pagamento'}}
             </ion-label>
             <ion-datetime pickerFormat="DD MMMM YYYY" displayFormat="DD MMM YYYY" doneText="CONFIRMAR" cancelText="CANCELAR"
-              max="2030-12-01">
+              max="2030-12-01" name="dataPagamento" [(ngModel)]="lancamento.dataPagamento">
             </ion-datetime>
           </ion-item>
         </ion-col>
@@ -60,10 +59,12 @@
           <ion-label floating>
             Descrição
           </ion-label>
-          <ion-input type="text" formControlName='descricao' required minlength="5"></ion-input>
+          <ion-input type="text" name="descricao" #descricao="ngModel" required minlength="5" [(ngModel)]="lancamento.descricao"></ion-input>
         </ion-item>
-        <p class='danger' *ngIf="formGroup.controls['descricao'].dirty && formGroup.controls['descricao'].errors"
-          margin-left>
+        <p class='danger' *ngIf="descricao.hasError('required') && descricao.dirty" margin-left>
+          Informe uma Descrição.
+        </p>
+        <p class='danger' *ngIf="descricao.hasError('minlength') && descricao.dirty" margin-left>
           Informe uma descrição com no mínimo 5 caracteres.
         </p>
       </ion-row>
@@ -73,10 +74,9 @@
           <ion-label floating>
             Valor
           </ion-label>
-          <ion-input type="text" name="money" [brmasker]="{money: true, thousand: '.',  decimalCaracter: ','}"
-            formControlName='valor' required></ion-input>
+          <ion-input type="number" name="valor" #valor="ngModel" required [(ngModel)]="lancamento.valor"></ion-input>
         </ion-item>
-        <p class='danger' *ngIf="formGroup.controls['valor'].dirty && formGroup.controls['valor'].errors" margin-left>
+        <p class='danger' *ngIf="valor.hasError('required') && valor.dirty" margin-left>
           Informe o valor.
         </p>
       </ion-row>
@@ -84,12 +84,12 @@
       <ion-row>
         <ion-item class="bod">
           <ion-label>Categoria</ion-label>
-          <ion-select submitText="Okay" cancelText="Cancelar" formControlName='categoria' required>
+          <ion-select submitText="Okay" cancelText="Cancelar" name="categoria" #vcategoria="ngModel" required
+            [(ngModel)]="lancamento.categoria.codigo">
             <ion-option value="{{categoria.value}}" *ngFor="let categoria of categorias">{{categoria.label}}</ion-option>
           </ion-select>
         </ion-item>
-        <p class='danger' *ngIf="formGroup.controls['categoria'].dirty && formGroup.controls['categoria'].errors"
-          margin-left>
+        <p class='danger' *ngIf="vcategoria.hasError('required') && vcategoria.dirty" margin-left>
           Selecione uma categoria.
         </p>
       </ion-row>
@@ -97,11 +97,11 @@
       <ion-row>
         <ion-item class="bod">
           <ion-label>Pessoa</ion-label>
-          <ion-select submitText="Okay" cancelText="Cancelar" formControlName='pessoa' required>
+          <ion-select submitText="Okay" cancelText="Cancelar" name="pessoa" #vpessoa="ngModel" required [(ngModel)]="lancamento.pessoa.codigo">
             <ion-option value="{{pessoa.value}}" *ngFor="let pessoa of pessoas">{{pessoa.label}}</ion-option>
           </ion-select>
         </ion-item>
-        <p class='danger' *ngIf="formGroup.controls['pessoa'].dirty && formGroup.controls['pessoa'].errors" margin-left>
+        <p class='danger' *ngIf="vpessoa.hasError('required') && vpessoa.dirty" margin-left>
           Selecione uma pessoa.
         </p>
       </ion-row>
@@ -111,13 +111,13 @@
           <ion-label floating>
             Observação
           </ion-label>
-          <ion-input name='observacao' type="text"></ion-input>
+          <ion-input type="text" name="observacao" [(ngModel)]="lancamento.observacao"></ion-input>
         </ion-item>
       </ion-row>
 
       <ion-row style="margin-top: 20px;">
         <ion-col>
-          <button ion-button round icon-start color="secondary" [disabled]='formGroup.invalid'>
+          <button ion-button round icon-start color="secondary" [disabled]="!lancamentoForm.valid" type="submit">
             <ion-icon name="md-checkmark-circle-outline"></ion-icon>
             SALVAR
           </button>
