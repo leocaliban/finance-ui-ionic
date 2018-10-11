@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
+import { PessoaService } from '../../services/domain/pessoa.service';
+import { Pessoa } from '../../models/pessoa';
+import { ErrorHandlerService } from '../../services/error-handler.service';
 
 @IonicPage()
 @Component({
@@ -9,27 +12,45 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 })
 export class NovaPessoaPage {
 
-  formGroup: FormGroup;
+  pessoa = new Pessoa();
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public formBuilder: FormBuilder,
-    public alertCtlr: AlertController) {
+    private pessoaService: PessoaService,
+    public alertCtlr: AlertController,
+    private errorHandler: ErrorHandlerService) {
 
-      this.formGroup = this.formBuilder.group({//Definir as validações dos campos do form
-        nome: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
-        logradouro: ['', [Validators.required]],
-        numero: ['', [Validators.required]],
-        bairro: ['', [Validators.required]],
-        cep: ['', [Validators.required]],
-        estado: ['', [Validators.required]],
-        cidade: ['', [Validators.required]]
-      });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NovaPessoaPage');
+  }
+
+  salvar() {
+    this.pessoaService.salvar(this.pessoa)
+      .then(() => {
+        this.showInsertOk();
+      })
+      .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  showInsertOk() {
+    let alert = this.alertCtlr.create({
+      title: 'Sucesso!',
+      message: 'Cadastro efetuado com sucesso',
+      enableBackdropDismiss: false,
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            this.navCtrl.pop();
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
 }

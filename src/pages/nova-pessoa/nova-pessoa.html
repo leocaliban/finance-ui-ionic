@@ -10,17 +10,17 @@
 
 <ion-content padding class="bod">
   <ion-grid>
-    <form [formGroup]='formGroup'>
+    <form #pessoaForm="ngForm" (ngSubmit)="salvar()">
 
       <ion-row>
         <ion-item class="bod">
           <ion-label floating>
             Nome
           </ion-label>
-          <ion-input type="text" formControlName='nome' required minlength="5"></ion-input>
+          <ion-input type="text" name="nome" #nome="ngModel" required minlength="8" [(ngModel)]="pessoa.nome"></ion-input>
         </ion-item>
-        <p class='danger' *ngIf="formGroup.controls['nome'].dirty && formGroup.controls['nome'].errors" margin-left>
-          Informe um nome com no mínimo 5 caracteres.
+        <p class='danger' *ngIf="nome.hasError('minlength') && nome.dirty" margin-left>
+          Informe um nome com no mínimo 8 caracteres.
         </p>
       </ion-row>
 
@@ -29,10 +29,9 @@
           <ion-label floating>
             Logradouro
           </ion-label>
-          <ion-input type="text" formControlName='logradouro' required></ion-input>
+          <ion-input type="text" name="rua" #rua="ngModel" required [(ngModel)]="pessoa.endereco.rua"></ion-input>
         </ion-item>
-        <p class='danger' *ngIf="formGroup.controls['logradouro'].dirty && formGroup.controls['logradouro'].errors"
-          margin-left>
+        <p class='danger' *ngIf="rua.hasError('required') && rua.dirty" margin-left>
           Informe o logradouro.
         </p>
       </ion-row>
@@ -42,10 +41,10 @@
           <ion-label floating>
             Número
           </ion-label>
-          <ion-input type="text" formControlName='numero' required></ion-input>
+          <ion-input type="text" name="numero" ngModel #numero="ngModel" required [(ngModel)]="pessoa.endereco.numero"></ion-input>
         </ion-item>
-        <p class='danger' *ngIf="formGroup.controls['numero'].dirty && formGroup.controls['numero'].errors" margin-left>
-          Informe o logradouro.
+        <p class='danger' *ngIf="numero.hasError('required') && numero.dirty" margin-left>
+          Informe o número.
         </p>
       </ion-row>
 
@@ -54,7 +53,7 @@
           <ion-label floating>
             Complemento
           </ion-label>
-          <ion-input name='complemento' type="text"></ion-input>
+          <ion-input type="text" name="complemento" [(ngModel)]="pessoa.endereco.complemento"></ion-input>
         </ion-item>
       </ion-row>
 
@@ -63,9 +62,9 @@
           <ion-label floating>
             Bairro
           </ion-label>
-          <ion-input type="text" formControlName='bairro' required></ion-input>
+          <ion-input type="text" name="bairro" ngModel #bairro="ngModel" required [(ngModel)]="pessoa.endereco.bairro"></ion-input>
         </ion-item>
-        <p class='danger' *ngIf="formGroup.controls['bairro'].dirty && formGroup.controls['bairro'].errors" margin-left>
+        <p class='danger' *ngIf="bairro.hasError('required') && bairro.dirty" margin-left>
           Informe o bairro.
         </p>
       </ion-row>
@@ -75,10 +74,11 @@
           <ion-label floating>
             CEP
           </ion-label>
-          <ion-input type="text" [brmasker]="{mask:'00.000-000', len:10, type:'num' }" formControlName='cep' required></ion-input>
+          <ion-input type="text" [brmasker]="{mask:'00.000-000', len:10, type:'num' }" name="cep" #cep="ngModel"
+            required [(ngModel)]="pessoa.endereco.cep"></ion-input>
 
         </ion-item>
-        <p class='danger' *ngIf="formGroup.controls['cep'].dirty && formGroup.controls['cep'].errors" margin-left>
+        <p class='danger' *ngIf="cep.hasError('required') && cep.dirty" margin-left>
           Informe o CEP.
         </p>
       </ion-row>
@@ -88,9 +88,9 @@
           <ion-label floating>
             Cidade
           </ion-label>
-          <ion-input type="text" formControlName='cidade' required></ion-input>
+          <ion-input type="text" name="cidade" #cidade="ngModel" required [(ngModel)]="pessoa.endereco.cidade"></ion-input>
         </ion-item>
-        <p class='danger' *ngIf="formGroup.controls['cidade'].dirty && formGroup.controls['cidade'].errors" margin-left>
+        <p class='danger' *ngIf="cidade.hasError('required') && cidade.dirty" margin-left>
           Informe a cidade.
         </p>
       </ion-row>
@@ -100,16 +100,16 @@
           <ion-label floating>
             Estado
           </ion-label>
-          <ion-input type="text" formControlName='estado' required></ion-input>
+          <ion-input type="text" name="estado" ngModel #estado="ngModel" required [(ngModel)]="pessoa.endereco.estado"></ion-input>
         </ion-item>
-        <p class='danger' *ngIf="formGroup.controls['estado'].dirty && formGroup.controls['estado'].errors" margin-left>
+        <p class='danger' *ngIf="estado.hasError('required') && estado.dirty" margin-left>
           Informe o estado.
         </p>
       </ion-row>
 
       <ion-row style="margin-top: 20px;">
         <ion-col>
-          <button ion-button round icon-start color="secondary" [disabled]='formGroup.invalid'>
+          <button type="submit" ion-button round icon-start color="secondary" [disabled]="!pessoaForm.valid">
             <ion-icon name="md-checkmark-circle-outline"></ion-icon>
             SALVAR
           </button>
