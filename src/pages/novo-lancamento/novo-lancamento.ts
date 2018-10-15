@@ -35,6 +35,11 @@ export class NovoLancamentoPage {
   }
 
   ionViewDidLoad() {
+    const codigoLancamento = this.navParams.get('codigo');
+    if (codigoLancamento) {
+      this.carregarLancamento(codigoLancamento);
+    }
+
     this.carregarCategorias();
     this.carregarPessoas();
   }
@@ -45,6 +50,13 @@ export class NovoLancamentoPage {
         this.showInsertOk();
       })
       .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  carregarLancamento(codigo: number) {
+    this.lancamentoService.buscarPorCodigo(codigo)
+      .then(response => {
+        this.lancamento = response;
+      }).catch(erro => this.errorHandler.handle(erro));
   }
 
   carregarCategorias() {
@@ -83,6 +95,10 @@ export class NovoLancamentoPage {
       ]
     });
     alert.present();
+  }
+
+  get editando() {
+    return Boolean(this.lancamento.codigo);
   }
 
 }

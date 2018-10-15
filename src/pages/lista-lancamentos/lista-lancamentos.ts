@@ -1,3 +1,4 @@
+import { Lancamento } from './../../models/lancamento';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController, AlertController } from 'ionic-angular';
 import { LancamentoService, LancamentoFiltro } from '../../services/domain/lancamento.service';
@@ -39,10 +40,10 @@ export class ListaLancamentosPage {
       this.lancamentos = this.lancamentos.concat(lancamentos);
       this.loader.dismiss();
     })
-    .catch(erro => {
-      this.loader.dismiss(),
-      this.errorHandler.handle(erro)
-    });
+      .catch(erro => {
+        this.loader.dismiss(),
+          this.errorHandler.handle(erro)
+      });
   }
 
   excluir(lancamento: any) {
@@ -133,6 +134,11 @@ export class ListaLancamentosPage {
     });
 
     toast.present();
+  }
+
+  editarLancamento(lancamento: Lancamento) {
+    const codigo = lancamento.codigo;
+    this.navCtrl.push('NovoLancamentoPage', { codigo: codigo });
   }
 
   /**
