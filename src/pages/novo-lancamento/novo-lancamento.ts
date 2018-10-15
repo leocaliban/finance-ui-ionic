@@ -45,11 +45,27 @@ export class NovoLancamentoPage {
   }
 
   salvar() {
+    if (this.editando) {
+      this.atualizarLancamento();
+    } else {
+      this.adicionarLancamento();
+    }
+  }
+
+  adicionarLancamento() {
     this.lancamentoService.salvar(this.lancamento)
       .then(() => {
-        this.showInsertOk();
+        this.showInsertOk('Cadastro efetuado com sucesso.');
       })
       .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  atualizarLancamento() {
+    this.lancamentoService.atualizar(this.lancamento)
+      .then(response => {
+        this.showUpdateOk('Lançamento alterado com sucesso.');
+        this.lancamento = response;
+      }).catch(erro => this.errorHandler.handle(erro));
   }
 
   carregarLancamento(codigo: number) {
@@ -80,16 +96,33 @@ export class NovoLancamentoPage {
       .catch(erro => this.errorHandler.handle(erro));
   }
 
-  showInsertOk() {
+  showInsertOk(mensagem: string) {
     let alert = this.alertCtlr.create({
       title: 'Sucesso!',
-      message: 'Cadastro efetuado com sucesso',
+      message: mensagem,
       enableBackdropDismiss: false,
       buttons: [
         {
           text: 'Ok',
           handler: () => {//função anônima
             this.navCtrl.pop();//desempilhar a página
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  showUpdateOk(mensagem: string) {
+    let alert = this.alertCtlr.create({
+      title: 'Sucesso!',
+      message: mensagem,
+      enableBackdropDismiss: false,
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            this.navCtrl.setRoot('LancamentosPage');
           }
         }
       ]
