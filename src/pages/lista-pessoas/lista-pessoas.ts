@@ -1,3 +1,4 @@
+import { Pessoa } from './../../../../finance-ui-material/src/app/core/domain/pessoa';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController, AlertController } from 'ionic-angular';
 import { PessoaFiltro, PessoaService } from '../../services/domain/pessoa.service';
@@ -133,6 +134,11 @@ export class ListaPessoasPage {
     toast.onDidDismiss(() => {
     });
     toast.present();
+  }
+
+  editarPessoa(pessoa: Pessoa) {
+    const codigo = pessoa.codigo;
+    this.navCtrl.push('NovaPessoaPage', { codigo: codigo });
   }
 
   public criar() {

@@ -25,7 +25,10 @@ export class NovaPessoaPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad NovaPessoaPage');
+    const codigoPessoa = this.navParams.get('codigo');
+    if (codigoPessoa) {
+      this.carregarPessoa(codigoPessoa);
+    }
   }
 
   salvar() {
@@ -34,6 +37,13 @@ export class NovaPessoaPage {
         this.showInsertOk();
       })
       .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  carregarPessoa(codigo: number) {
+    this.pessoaService.buscarPorCodigo(codigo)
+      .then(response => {
+        this.pessoa = response;
+      }).catch(erro => this.errorHandler.handle(erro));
   }
 
   showInsertOk() {
@@ -51,6 +61,10 @@ export class NovaPessoaPage {
       ]
     });
     alert.present();
+  }
+
+  get editando() {
+    return Boolean(this.pessoa.codigo);
   }
 
 }
