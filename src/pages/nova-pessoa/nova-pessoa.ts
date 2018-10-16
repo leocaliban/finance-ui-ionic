@@ -32,11 +32,27 @@ export class NovaPessoaPage {
   }
 
   salvar() {
+    if (this.editando) {
+      this.atualizarPessoa();
+    } else {
+      this.adicionarPessoa();
+    }
+  }
+
+  adicionarPessoa() {
     this.pessoaService.salvar(this.pessoa)
       .then(() => {
-        this.showInsertOk();
+        this.showInsertOk('Cadastro efetuado com sucesso.');
       })
       .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  atualizarPessoa() {
+    this.pessoaService.atualizar(this.pessoa)
+      .then(response => {
+        this.showUpdateOk('Pessoa alterada com sucesso.');
+        this.pessoa = response;
+      }).catch(erro => this.errorHandler.handle(erro));
   }
 
   carregarPessoa(codigo: number) {
@@ -46,16 +62,33 @@ export class NovaPessoaPage {
       }).catch(erro => this.errorHandler.handle(erro));
   }
 
-  showInsertOk() {
+  showInsertOk(mensagem: string) {
     let alert = this.alertCtlr.create({
       title: 'Sucesso!',
-      message: 'Cadastro efetuado com sucesso',
+      message: mensagem,
       enableBackdropDismiss: false,
       buttons: [
         {
           text: 'Ok',
           handler: () => {
             this.navCtrl.pop();
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  showUpdateOk(mensagem: string) {
+    let alert = this.alertCtlr.create({
+      title: 'Sucesso!',
+      message: mensagem,
+      enableBackdropDismiss: false,
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            this.navCtrl.setRoot('PessoasPage');
           }
         }
       ]
